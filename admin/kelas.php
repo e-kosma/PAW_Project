@@ -47,10 +47,10 @@
                 <td><?php echo $data[7]; ?></td>
                 <td>
                 	<center>
-                        <a href="?page=matkul&id=<?php echo $data[0]; ?>">
+                        <a href="?page=kelas&id=<?php echo $data[0]; ?>">
                         	<div class="glyphicon glyphicon-edit"></div>
                         </a>
-                        <a href="?page=matkul&delete=y&id=<?php echo $data[0]; ?>" onclick="return confirm('Anda Yakin Akan Menghapus ?')">
+                        <a href="?page=kelas&delete=y&id=<?php echo $data[0]; ?>" onclick="return confirm('Anda Yakin Akan Menghapus ?')">
                         	<div class="glyphicon glyphicon-erase"></div>
                         </a>
                     </center>
@@ -75,14 +75,29 @@
                 <form action="?page=kelas" method="post" id="frm-kelas">
         		<div class="modal-body">
                     	<fieldset>
-                        	<div class="form-group">
+                        	  <div class="form-group">
                             	<input class="form-control" placeholder="Kode Kelas" name="kd_kelas" type="text" autofocus maxlength="8" required>
                             </div>
                             <div class="form-group">
-                            	<input class="form-control" placeholder="Nama Kelas" name="nm_matkul" type="text" value="" maxlength="35">
+                            	<input class="form-control" plceholder="Nama Kelas" name="nm_matkul" type="text" value="" maxlength="35">
                             </div>
                            <div class="form-group" style="width:55px">
-                            	<input class="form-control" placeholder="SKS" name="sks" type="text" value="" maxlength="1">
+                            	<input class="form-control" placeholder="Hari" name="hari" type="text" value="" maxlength="7">
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" plceholder="Jam Masuk" name="jam_masuk" type="text" value="">
+                            </div>
+                             <div class="form-group">
+                              <input class="form-control" plceholder="Jam Keluar" name="jam_keluar" type="text" value="">
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" placeholder="nip" name="nip" type="text" autofocus maxlength="8" required>
+                            </div>
+                             <div class="form-group">
+                              <input class="form-control" placeholder="Kode Matkul" name="kd_matkul" type="text" autofocus maxlength="18" required>
+                            </div>
+                             <div class="form-group">
+                              <input class="form-control" placeholder="nip" name="Kode Ruang" type="text" autofocus maxlength="11" required>
                             </div>
                        </fieldset>
         		</div>
@@ -104,20 +119,35 @@
       		<div class="modal-content">
         		<div class="modal-header">
           			<button type="button" class="close" data-dismiss="modal">&times;</button>
-          			<h4 class="modal-title">Edit Data Matakuliah</h4>
+          			<h4 class="modal-title">Edit Data Kelas</h4>
         		</div>
-                <form action="?page=matkul" method="post" id="frm-matkul">
+                <form action="?page=kelas" method="post" id="frm-kelas">
         		<div class="modal-body">
                     	<fieldset>
                         <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>">
                         	<div class="form-group">
-                            	<input class="form-control" placeholder="Kode Matakuliah" name="kd_matkul" type="text" autofocus maxlength="8" value="<?php echo $_GET['id']; ?>"  required>
+                            	<input class="form-control" placeholder="Kode Kelas" name="kd_kelas" type="text" autofocus maxlength="8" value="<?php echo $_GET['id']; ?>"  required>
                             </div>
                             <div class="form-group">
-                            	<input class="form-control" placeholder="Nama Matakuliah" name="nm_matkul" type="text" maxlength="35" value="<?php get_data('matkul', 'kd_matkul', $_GET['id'], 'nm_matkul'); ?>">
+                            	<input class="form-control" placeholder="Nama Kelas" name="nm_kelas" type="text" maxlength="35" value="<?php get_data('kelas', 'kd_kelas', $_GET['id'], 'nm_kelas'); ?>">
                             </div>
                            <div class="form-group" style="width:55px">
-                            	<input class="form-control" placeholder="SKS" name="sks" type="text" value="<?php get_data('matkul', 'kd_matkul', $_GET['id'], 'sks'); ?>" maxlength="1">
+                            	<input class="form-control" placeholder="Hari" name="hari" type="text" value="<?php get_data('kelas', 'kd_kelas', $_GET['id'], ''); ?>" maxlength="1">
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" placeholder="Jam Masuk" name="jam_masuk" type="text" autofocus maxlength="8" value="<?php echo $_GET['id']; ?>"  required>
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" placeholder="Jam Keluar" name="jam_keluar" type="text" autofocus maxlength="8" value="<?php echo $_GET['id']; ?>"  required>
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" placeholder="Nama Dosen" name="nip" type="text" autofocus maxlength="18" value="<?php echo $_GET['id']; ?>"  required>
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" placeholder="Kode Matkul" name="kd_matkul" type="text" autofocus maxlength="8" value="<?php echo $_GET['id']; ?>"  required>
+                            </div>
+                            <div class="form-group">
+                              <input class="form-control" placeholder="Kode Ruang" name="kd_ruang" type="text" autofocus maxlength="11" value="<?php echo $_GET['id']; ?>"  required>
                             </div>
                        </fieldset>
         		</div>
