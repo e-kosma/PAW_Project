@@ -6,7 +6,7 @@
 	include "../config/fungsi.php";
 	include "../config/koneksi.php";
 	cek_login($user);
-	
+
 	if(isset($_GET['page']))
     	$page=$_GET['page'];
 	else
@@ -27,7 +27,7 @@
   <div class="container-fluid">
       <div class="wrapper">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/e">E-KOSMA</a>
+          <a class="navbar-brand" href="/e-kosma">E-KOSMA</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
         	<div class="navbar-brand" style="font-size:14px">Selamat Datang! <?php echo $_SESSION['name']; ?></div>
@@ -52,8 +52,8 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3 col-md-3">
-        	
-        
+
+
             <div class="panel-group" id="accordion">
             	<div class="panel panel-default">
                   <div class="panel-heading">
@@ -87,7 +87,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="#">Kelas</a>
+                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=kelas">Kelas</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -133,19 +133,19 @@
         </div>
         <div class="col-sm-9 col-md-9">
             <div class="panel panel-default">
-                  
-                  
+
+
 				   <?php
-                        
+
                             if($page=="matkul")
                                 include "matkul.php";
-                            else if($page=="dosen")
-                                include "dosen.php";
+                            else if($page=="kelas")
+                                include "kelas.php";
 							else if($page=="pengumuman")
 								include "welcome.php";
                    ?>
-                	
-            </div> 
+
+            </div>
         </div>
     </div>
 </div>
@@ -154,9 +154,9 @@
 	<script src="../asset/js/jquery.min.js"></script>
     <script src="../asset/js/bootstrap.min.js"></script>
     <script src="../asset/js/dataTables/jquery.dataTables.js"></script>
-    <script src="../asset/js/dataTables/dataTables.bootstrap.js"></script> 
-    
-     
+    <script src="../asset/js/dataTables/dataTables.bootstrap.js"></script>
+
+
 	 <?php
      	if(isset($_GET['id']) && !isset($_GET['delete'])){
 			echo "<script>
@@ -164,12 +164,12 @@
 			</script>";
 		}
 	 ?>
-     
+
      <script type="text/javascript">
     	$(function() {
         	$('#tabel1').dataTable();
         });
 	</script>
-    
+
 </body>
 </html>

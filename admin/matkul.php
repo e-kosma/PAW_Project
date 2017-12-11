@@ -1,21 +1,21 @@
 <?php
 	$cek = cek_login($user);
-	
+
 	if(isset($_POST['input'])){ input_matkul(); }
 	if(isset($_POST['edit'])){ edit_matkul(); }
-	if(isset($_GET['delete'])){ 
+	if(isset($_GET['delete'])){
 		delete_data('matkul','kd_matkul', $_GET['id']);
 		}
 ?>
 
-<div class="panel-heading">Data Matakuliah 
+<div class="panel-heading">Data Matakuliah
     <ul class="nav navbar-nav navbar-right"><a href="#" data-toggle="modal" data-target="#myModal"><div class="glyphicon glyphicon-plus"></div></a></ul>
 </div>
 <br>
 <!-- ---------------------------------------------------------------view--------------------------------- -->
 <div class="panel-body">
-	<div style="width:98%; margin:auto"> 
-    
+	<div style="width:98%; margin:auto">
+
           <table id="tabel1" class="table">
             <thead>
               <tr>
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
                 <?php
-                    $sql = mysqli_query($link, "select * from matkul") or die(mysqli_error()); 
+                    $sql = mysqli_query($link, "select * from matkul") or die(mysqli_error());
                     while($data = mysqli_fetch_row($sql)){
                 ?>
               <tr>
@@ -48,7 +48,7 @@
               <?php } ?>
             </tbody>
           </table>
-          
+
 	</div>
 </div>
 
@@ -81,10 +81,10 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
+
 
 <!-- --------------------------------------------------- EDIT --------------------------------------------------- -->
 <div class="modal fade" id="myEdit" role="dialog">
@@ -103,10 +103,10 @@
                             	<input class="form-control" placeholder="Kode Matakuliah" name="kd_matkul" type="text" autofocus maxlength="8" value="<?php echo $_GET['id']; ?>"  required>
                             </div>
                             <div class="form-group">
-                            	<input class="form-control" placeholder="Nama Matakuliah" name="nm_matkul" type="text" maxlength="35" value="<?php get_data('matkul', 'kd_matkul', $_GET['id'], 'nm_matkul'); ?>">
+                            	<input class="form-control" placeholder="Nama Matakuliah" name="nm_matkul" type="text" maxlength="35" value="<?php echo get_data('matkul', 'kd_matkul', $_GET['id'], 'nm_matkul'); ?>">
                             </div>
                            <div class="form-group" style="width:55px">
-                            	<input class="form-control" placeholder="SKS" name="sks" type="text" value="<?php get_data('matkul', 'kd_matkul', $_GET['id'], 'sks'); ?>" maxlength="1">
+                            	<input class="form-control" placeholder="SKS" name="sks" type="text" value="<?php echo get_data('matkul', 'kd_matkul', $_GET['id'], 'sks'); ?>" maxlength="1">
                             </div>
                        </fieldset>
         		</div>
@@ -116,8 +116,6 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
-    
