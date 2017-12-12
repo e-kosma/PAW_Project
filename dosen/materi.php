@@ -1,26 +1,26 @@
 <?php
 	$cek = cek_login($user);
-	
+
 	if(isset($_POST['upload'])){ upload_file(); }
 	if(isset($_GET['file'])){ download_file(); }
-	if(isset($_GET['delete'])){ 
+	if(isset($_GET['delete'])){
 		delete_data('tb_file','kd_file', $_GET['delete']);
 		}
 ?>
 
-<div class="panel-heading">Materi Kuliah 
-	<?php 
-		get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_matkul'); 
+<div class="panel-heading">Materi Kuliah
+	<?php
+		echo get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_matkul');
 		echo " - ";
-		get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_kelas'); 
+		echo get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_kelas'); 
 	?>
     <ul class="nav navbar-nav navbar-right"><a href="#" data-toggle="modal" data-target="#myModal"><div class="glyphicon glyphicon-cloud-upload"></div></a></ul>
 </div>
 <br>
 <!-- ---------------------------------------------------------------view--------------------------------- -->
 <div class="panel-body">
-	<div style="width:98%; margin:auto"> 
-    
+	<div style="width:98%; margin:auto">
+
           <table id="tabel1" class="table">
             <thead>
               <tr>
@@ -34,7 +34,7 @@
             <tbody>
                 <?php
 					$no = 1;
-                    $sql = mysqli_query($link, "select * from tb_file where kd_kelas = '$_GET[id]' and id_upload = '$_SESSION[id]'") or die(mysqli_error()); 
+                    $sql = mysqli_query($link, "select * from tb_file where kd_kelas = '$_GET[id]' and id_upload = '$_SESSION[id]'") or die(mysqli_error());
                     while($data = mysqli_fetch_row($sql)){
                 ?>
               <tr align="center">
@@ -56,7 +56,7 @@
               <?php $no++; } ?>
             </tbody>
           </table>
-          
+
 	</div>
 </div>
 
@@ -86,6 +86,6 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>

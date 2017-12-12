@@ -1,21 +1,21 @@
 <?php
 	$cek = cek_login($user);
-	
+
 	if(isset($_GET['file'])){ download_file(); }
 ?>
 
-<div class="panel-heading">Materi Kuliah 
-	<?php 
-		get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_matkul'); 
+<div class="panel-heading">Materi Kuliah
+	<?php
+		echo get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_matkul');
 		echo " - ";
-		get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_kelas'); 
+		echo get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_kelas'); 
 	?>
 </div>
 <br>
 <!-- ---------------------------------------------------------------view--------------------------------- -->
 <div class="panel-body">
-	<div style="width:98%; margin:auto"> 
-    
+	<div style="width:98%; margin:auto">
+
           <table id="tabel1" class="table">
             <thead>
               <tr>
@@ -29,7 +29,7 @@
             <tbody>
                 <?php
 					$no = 1;
-                    $sql = mysqli_query($link, "select * from tb_file where kd_kelas = '$_GET[id]' and jenis = 'materi'") or die(mysqli_error()); 
+                    $sql = mysqli_query($link, "select * from tb_file where kd_kelas = '$_GET[id]' and jenis = 'materi'") or die(mysqli_error());
                     while($data = mysqli_fetch_row($sql)){
                 ?>
               <tr align="center">
@@ -48,6 +48,6 @@
               <?php $no++; } ?>
             </tbody>
           </table>
-          
+
 	</div>
 </div>
