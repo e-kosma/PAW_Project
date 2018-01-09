@@ -115,11 +115,11 @@
                                         <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=ambil_kelas">Ambil Kelas</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-chevron-right"></span><a href="#">Kelas Ganti</a>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=file">File</a>

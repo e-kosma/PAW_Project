@@ -88,14 +88,14 @@
 
 	function input_tugas(){
 		include "koneksi.php";
-		$sql = "insert into tugas values('','$_POST[nm_tugas]', '$_POST[kd_kelas]', '$_POST[date_line]', '$_POST[jam]')";
+		$sql = "insert into tugas values('','$_POST[nm_tugas]', '$_POST[deskripsi]', '$_POST[kd_kelas]', '$_POST[date_line]', '$_POST[jam]')";
 
 		$query = $link->query($sql);
 
 		if($query){
-			alert_box("Data Berhasil Ditambahkan !!");
+			alert_box("Data tugas Berhasil Ditambahkan !!");
 		}else{
-			alert_box("Data Gagal Ditambahkan !!");
+			alert_box("Data tugas Gagal Ditambahkan !!");
 		}
 	}
 

@@ -11,6 +11,8 @@
     	$page=$_GET['page'];
 	else
 		$page="pengumuman";
+
+		if(isset($_POST['input_tugas'])){ input_tugas(); }
 ?>
 <!doctype html>
 <html>
@@ -36,9 +38,9 @@
             	<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-            	<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+            	<!--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
-                <li class="divider"></li>
+                <li class="divider"></li> -->
                 <li><a href="../config/logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
            </ul>
@@ -55,7 +57,7 @@
 
 
             <div class="panel-group" id="accordion">
-            	<div class="panel panel-default">
+            	<!--<div class="panel panel-default">
                   <div class="panel-heading">
                   	<h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapsezero"><span class="glyphicon glyphicon-folder-close">
@@ -69,9 +71,7 @@
                             </div>
                         </div>
                   </div>
-
-
-            	</div>
+            	</div> -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -116,6 +116,7 @@
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
                             </span>Tugas</a>
+														<ul class="nav navbar-nav navbar-right"><a href="#" data-toggle="modal" data-target="#modalTugas"><div class="glyphicon glyphicon-plus"></div></a></ul>
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse">
@@ -190,6 +191,61 @@
         </div>
     </div>
 </div>
+
+
+<!------------------------------INSERT TUGAS------------------------------------------------->
+<div class="modal fade" id="modalTugas" role="dialog">
+    	<div class="modal-dialog modal-sm">
+
+      		<div class="modal-content">
+        		<div class="modal-header">
+          			<button type="button" class="close" data-dismiss="modal">&times;</button>
+          			<h4 class="modal-title">Tambah Data Tugas</h4>
+        		</div>
+                <form action="index.php" method="post" id="frm-ambil_kelas">
+        		<div class="modal-body">
+                    	<fieldset>
+                        	<div class="form-group">
+															<select class="form-control" name="kd_kelas" required>
+																<option value="" disabled selected>--- Pilih Kelas ---</option>
+																<?php
+																		$no = 1;
+								                    $query = mysqli_query($link, "select * from v_kelas where nm_dosen = '$_SESSION[name]'") or die(mysqli_error());
+								                    while($data = mysqli_fetch_row($query)){
+								                ?>
+                                    <option value="<?php echo $data[0]; ?>"><?php echo $data[6]." - ".$data[1]; ?></option>
+																<?php
+															     }
+																?>
+															</select>
+                            </div>
+                            <div class="form-group">
+															<input class="form-control" type="text" name="nm_tugas" required placeholder="Nama Tugas">
+                            </div>
+														<div class="form-group">
+															<textarea class="form-control" name="deskripsi" placeholder="Deskripsi">
+															</textarea>
+														</div>
+															Tanggal Pengumpulan :
+														<div class="form-group" style="width:160px">
+															<input  class="form-control" type="date" name="date_line" required>
+                            </div>
+															Jam :
+														<div class="form-group" style="width:160px">
+															<input class="form-control" type="time" name="jam" required>
+                            </div>
+                       </fieldset>
+        		</div>
+        		<div class="modal-footer">
+         			<input type="submit" class="btn btn-default" name="input_tugas" value="Tambah">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		</div>
+                </form>
+      		</div>
+
+    	</div>
+	</div>
+
 
 <!-- ------------------------------------------------------------------------ -->
 	<script src="../asset/js/jquery.min.js"></script>

@@ -39,9 +39,9 @@
             	<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-            	<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+            	<!-- <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
-                <li class="divider"></li>
+                <li class="divider"></li> -->
                 <li><a href="../config/logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
            </ul>
@@ -58,21 +58,21 @@
 
 
             <div class="panel-group" id="accordion">
-            	<div class="panel panel-default">
+            <!--	<div class="panel panel-default">
                   <div class="panel-heading">
                   	<h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapsezero"><span class="glyphicon glyphicon-folder-close">
                             </span>Pengumuman</a>
                     </h4>
                   </div>
-                  <div id="collapsezero" class="panel-collapse collapse">
+               <div id="collapsezero" class="panel-collapse collapse">
                         <div class="panel-body">
                         	<div class="container">
                             	Isi Pengumuman
                             </div>
                         </div>
                   </div>
-            	</div>
+            	</div> -->
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -127,35 +127,43 @@
                             <table class="table">
 															<?php
 															$sql = mysqli_query($link, "select * from v_ambil_kelas where nim = '$_SESSION[id]'");
-
+															$count=1;
 																	while($data = mysqli_fetch_assoc($sql)){
 																		date_default_timezone_set('Asia/Jakarta');
 																		$date_line = date('Y-m-d');
 																		$jam = date("h:i:sa");
-																		$sql2 = mysqli_query($link, "select * from tugas where kd_kelas = '$data[kd_kelas]' and date_line >= '$date_line' and jam >='$jam'");
-																		$count = mysqli_num_rows($sql2);
-																		if($count>0){
+																		$sql2 = mysqli_query($link, "select * from tugas where kd_kelas = '$data[kd_kelas]' and date_line >= '$date_line'");
+																		//$count = mysqli_num_rows($sql2);
+
 																			while($data2 = mysqli_fetch_assoc($sql2)){
+																				if($data2['date_line'] == $date_line){
+																					if($data2['jam'] < $jam){
+																							$count=0;
+																				  }
+																				}
 
-															?>
-																						<tr>
-																								<td>
-																										<strong></strong>
-																										<span class="glyphicon glyphicon-chevron-right"></span>
-																										<a href="?page=tugas&id=<?php echo $data2['id']; ?>&kls=<?php echo $data['kd_kelas']; ?>"><?php echo $data['nm_matkul']." (".$data['nm_kelas'].") - ".$data2['nm_tugas']; ?></a>
-																								</td>
-																						</tr>
-																<?php
-																	}
-																}else{
-																?>
-
+																				if($count>0){
+																					?>
+																					<tr>
+																							<td>
+																									<strong></strong>
+																									<span class="glyphicon glyphicon-chevron-right"></span>
+																									<a href="?page=tugas&id=<?php echo $data2['id']; ?>&kls=<?php echo $data['kd_kelas']; ?>"><?php echo $data['nm_matkul']." (".$data['nm_kelas'].") - ".$data2['nm_tugas']; ?></a>
+																							</td>
+																					</tr>
+																					<?php
+																					}else{
+																						?>
 																						<tr>
 																								<td>
 																										<h6 style="text-align:center">Tidak ada tugas!!</h6>
 																								</td>
 																						</tr>
-																<?php } } ?>
+																						<?php
+																					}
+															 }
+															}
+															?>
 
 
 
@@ -169,6 +177,7 @@
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
                             </span>Kelas Ganti</a>
+														<ul class="nav navbar-nav navbar-right"><a href="?page=ruang"><div class="glyphicon glyphicon-plus"></div></a></ul>
                         </h4>
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse">
@@ -196,6 +205,8 @@
                                 include "materi.php";
                             else if($page=="dosen")
                                 include "dosen.php";
+														else if($page=="ruang")
+		                            include "ruang.php";
 							else if($page=="pengumuman")
 								include "../config/welcome.php";
                    ?>
@@ -235,6 +246,10 @@
                             <div class="form-group">
 															<input class="form-control" type="text" name="nm_tugas" required placeholder="Nama Tugas">
                             </div>
+														<div class="form-group">
+															<textarea placeholder="Deskripsi" class="form-control" name="deskripsi">
+															</textarea>
+														</div>
 															Tanggal Pengumpulan :
 														<div class="form-group" style="width:160px">
 															<input  class="form-control" type="date" name="date_line" required>
@@ -268,6 +283,13 @@
 	        		</div>
 	                <form enctype="multipart/form-data" action="index.php" method="post">
 				        		<div class="modal-body">
+											<?php
+													$qwr = mysqli_query($link, "select * from tb_file where jenis = '$_GET[id]' and id_upload = '$_SESSION[id]'") or die(mysqli_error());
+													$jml = mysqli_num_rows($qwr);
+													if($jml>0){
+														echo "<center>Kamu sudah mengupload tugas ini !</center>";
+													}else{
+											?>
 				                    	<fieldset>
 
 																		<?php
@@ -287,6 +309,10 @@
 																		<input type="file" name="file_upload">
 				                          </div>
 				                       </fieldset>
+
+															 <?php
+														 			}
+															?>
 				        		</div>
 	        		<div class="modal-footer">
 	         			<input type="submit" class="btn btn-default" name="upload_tugas" value="Upload">
