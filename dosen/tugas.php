@@ -34,7 +34,7 @@
             <tbody>
                 <?php
 					$no = 1;
-                    $sql = mysqli_query($link, "select * from tugas where kd_kelas = '$_GET[id]'") or die(mysqli_error());
+                    $sql = mysqli_query($link, "select * from tugas where kd_kelas = '$_GET[kls]'") or die(mysqli_error());
                     while($data = mysqli_fetch_row($sql)){
                 ?>
               <tr align="center">

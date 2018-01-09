@@ -152,14 +152,6 @@
 																							</td>
 																					</tr>
 																					<?php
-																					}else{
-																						?>
-																						<tr>
-																								<td>
-																										<h6 style="text-align:center">Tidak ada tugas!!</h6>
-																								</td>
-																						</tr>
-																						<?php
 																					}
 															 }
 															}
@@ -172,7 +164,7 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
+                <!-- <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
@@ -185,14 +177,15 @@
                             <table class="table">
                                 <tr>
                                     <td>
-																			<!-- <a href="#"><div class="glyphicon glyphicon-chevron-right"></div></a> -->
+																			<a href="#"><div class="glyphicon glyphicon-chevron-right"></div></a>
 																			<h6 style="text-align:center">tidak ada kelas ganti</h6>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
             </div>
         </div>
         <div class="col-sm-9 col-md-9">

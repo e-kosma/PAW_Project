@@ -18,7 +18,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Panel Admin</title>
+    <title>Panel Dosen</title>
     <link href="../asset/css/bootstrap.min.css" rel="stylesheet">
     <link href="../asset/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../asset/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
@@ -123,34 +123,41 @@
                         <div class="panel-body">
                             <table class="table">
 															<?php
-								$sql = mysqli_query($link, "select kelas.kd_kelas, kelas.nm_kelas, matkul.nm_matkul from kelas,matkul,dosen where kelas.nip = '$_SESSION[id]' and kelas.kd_matkul = matkul.kd_matkul");
-								$count = mysqli_num_rows($sql);
-								if($count>0){
-									while($data = mysqli_fetch_assoc($sql)){
-							 ?>
-															<tr>
-																	<td>
-																			<span class="glyphicon glyphicon-chevron-right"></span>
-																			<a href="?page=tugas&id=<?php echo $data['kd_kelas']; ?>"><?php echo $data['nm_matkul']." - ".$data['nm_kelas']; ?></a>
-																	</td>
-															</tr>
-															<?php
-									}
+															$sql = mysqli_query($link, "select * from v_kelas where nm_dosen = '$_SESSION[name]'");
+															$count=1;
+																	while($data = mysqli_fetch_assoc($sql)){
+																		date_default_timezone_set('Asia/Jakarta');
+																		$date_line = date('Y-m-d');
+																		$jam = date("h:i:sa");
+																		$sql2 = mysqli_query($link, "select * from tugas where kd_kelas = '$data[kd_kelas]' and date_line >= '$date_line'");
+																		//$count = mysqli_num_rows($sql2);
 
-								}else{
-							?>
+																			while($data2 = mysqli_fetch_assoc($sql2)){
+																				if($data2['date_line'] == $date_line){
+																					if($data2['jam'] < $jam){
+																							$count=0;
+																				  }
+																				}
 
-															<tr>
-																	<td>
-																			<h6 style="text-align:center">Tidak ada tugas</h6>
-																	</td>
-															</tr>
-															<?php } ?>
+																				if($count>0){
+																					?>
+																					<tr>
+																							<td>
+																									<strong></strong>
+																									<span class="glyphicon glyphicon-chevron-right"></span>
+																									<a href="?page=tugas&id=<?php echo $data2['id']; ?>&kls=<?php echo $data['kd_kelas']; ?>"><?php echo $data['nm_matkul']." (".$data['nm_kelas'].") - ".$data2['nm_tugas']; ?></a>
+																							</td>
+																					</tr>
+																					<?php
+																					}
+															 }
+															}
+															?>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <!--<div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
@@ -168,7 +175,8 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
             </div>
         </div>
         <div class="col-sm-9 col-md-9">
