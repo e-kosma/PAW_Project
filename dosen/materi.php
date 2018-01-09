@@ -10,9 +10,9 @@
 
 <div class="panel-heading">Materi Kuliah
 	<?php
-		echo get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_matkul');
+		echo get_data('v_kelas','kd_kelas',$_GET['id'],'nm_matkul');
 		echo " - ";
-		echo get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_kelas'); 
+		echo get_data('v_kelas','kd_kelas',$_GET['id'],'nm_kelas'); 
 	?>
     <ul class="nav navbar-nav navbar-right"><a href="#" data-toggle="modal" data-target="#myModal"><div class="glyphicon glyphicon-cloud-upload"></div></a></ul>
 </div>

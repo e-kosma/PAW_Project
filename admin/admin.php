@@ -1,6 +1,6 @@
 <?php
 	$cek = cek_login($user);
-	
+
 	if(isset($_POST['input'])){ input_admin(); }
 	if(isset($_POST['edit'])){ edit_admin(); }
 	if(isset($_GET['delete'])){ 
@@ -8,14 +8,14 @@
 		}
 ?>
 
-<div class="panel-heading">Data Admin 
+<div class="panel-heading">Data Admin
     <ul class="nav navbar-nav navbar-right"><a href="#" data-toggle="modal" data-target="#myModal"><div class="glyphicon glyphicon-plus"></div></a></ul>
 </div>
 <br>
 <!-- ---------------------------------------------------------------view--------------------------------- -->
 <div class="panel-body">
-	<div style="width:98%; margin:auto"> 
-    
+	<div style="width:98%; margin:auto">
+
           <table id="tabel1" class="table">
             <thead>
               <tr>
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
                 <?php
-                    $sql = mysqli_query($link, "select * from admin") or die(mysqli_error()); 
+                    $sql = mysqli_query($link, "select * from admin") or die(mysqli_error());
                     while($data = mysqli_fetch_row($sql)){
                 ?>
               <tr>
@@ -48,7 +48,7 @@
               <?php } ?>
             </tbody>
           </table>
-          
+
 	</div>
 </div>
 
@@ -81,10 +81,10 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
+
 
 <!-- --------------------------------------------------- EDIT --------------------------------------------------- -->
 <div class="modal fade" id="myEdit" role="dialog">
@@ -117,8 +117,6 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
-    

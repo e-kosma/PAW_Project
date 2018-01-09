@@ -92,27 +92,27 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="#">Ruangan</a>
+                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=ruang">Ruangan</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="#">Dosen</a>
+                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=dosen">Dosen</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="#">Mahasiswa</a>
+                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=mhs">Mahasiswa</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="#">Admin</a>
+                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=admin">Admin</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="#">Ambil Kelas</a>
+                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=ambil_kelas">Ambil Kelas</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -122,7 +122,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="#">File</a>
+                                        <span class="glyphicon glyphicon-chevron-right"></span><a href="?page=file">File</a>
                                     </td>
                                 </tr>
                             </table>
@@ -141,8 +141,20 @@
                                 include "matkul.php";
                             else if($page=="kelas")
                                 include "kelas.php";
-							else if($page=="pengumuman")
-								include "welcome.php";
+														else if($page=="ruang")
+		                            include "ruang.php";
+														else if($page=="dosen")
+				                        include "dosen.php";
+														else if($page=="mhs")
+						                     include "mhs.php";
+														else if($page=="admin")
+		 						                 include "admin.php";
+														else if($page=="ambil_kelas")
+		 		 						             include "ambil_kelas.php";
+														else if($page=="file")
+																 include "tb_file.php";
+														else if($page=="pengumuman")
+																include "welcome.php";
                    ?>
 
             </div>

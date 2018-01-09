@@ -6,9 +6,9 @@
 
 <div class="panel-heading">Materi Kuliah
 	<?php
-		echo get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_matkul');
+		echo get_data('v_ambil_kelas','kd_kelas',$_GET['id'],'nm_matkul');
 		echo " - ";
-		echo get_data('tb_view_kelas','kd_kelas',$_GET['id'],'nm_kelas'); 
+		echo get_data('v_ambil_kelas','kd_kelas',$_GET['id'],'nm_kelas');
 	?>
 </div>
 <br>
@@ -39,7 +39,7 @@
                 <td><?php echo $data[3]." ".$data[4] ?></td>
                 <td>
                 	<center>
-                        <a href="?page=materi&file=<?php echo $data[1]; ?>">
+                        <a href="?page=materi&id=<?php echo $_GET['id']; ?>&file=<?php echo $data[1]; ?>">
                         	<div class="glyphicon glyphicon-download-alt"></div>
                         </a>
                     </center>

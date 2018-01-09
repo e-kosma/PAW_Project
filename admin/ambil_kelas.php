@@ -1,37 +1,39 @@
 <?php
 	$cek = cek_login($user);
-	
+
 	if(isset($_POST['input'])){ input_ambil_kelas(); }
 	if(isset($_POST['edit'])){ edit_ambil_kelas(); }
-	if(isset($_GET['delete'])){ 
-		delete_data('ambil_kelas','nim', $_GET['id']);
+	if(isset($_GET['delete'])){
+		delete_data('ambil_kelas','id', $_GET['id']);
 		}
 ?>
 
-<div class="panel-heading">Data Matakuliah 
+<div class="panel-heading">Data Matakuliah
     <ul class="nav navbar-nav navbar-right"><a href="#" data-toggle="modal" data-target="#myModal"><div class="glyphicon glyphicon-plus"></div></a></ul>
 </div>
 <br>
 <!-- ---------------------------------------------------------------view--------------------------------- -->
 <div class="panel-body">
-	<div style="width:98%; margin:auto"> 
-    
+	<div style="width:98%; margin:auto">
+
           <table id="tabel1" class="table">
             <thead>
               <tr>
                 <th>NIM</th>
-                <th>Kode Kelas</th>
+								<th>Nama Mahasiswa</th>
+                <th>Kelas</th>
                 <th width="80px"><center><div class="fa fa-gear fa-fw"></div></center></th>
               </tr>
             </thead>
             <tbody>
                 <?php
-                    $sql = mysqli_query($link, "select * from ambil_kelas") or die(mysqli_error()); 
+                    $sql = mysqli_query($link, "select * from v_ambil_kelas") or die(mysqli_error());
                     while($data = mysqli_fetch_row($sql)){
                 ?>
               <tr>
-                <td><?php echo $data[0]; ?></td>
                 <td><?php echo $data[1]; ?></td>
+                <td><?php echo $data[2]; ?></td>
+								<td><?php echo $data[3]." - ".$data[4]; ?></td>
                 <td>
                 	<center>
                         <a href="?page=ambil_kelas&id=<?php echo $data[0]; ?>">
@@ -46,7 +48,7 @@
               <?php } ?>
             </tbody>
           </table>
-          
+
 	</div>
 </div>
 
@@ -63,10 +65,32 @@
         		<div class="modal-body">
                     	<fieldset>
                         	<div class="form-group">
-                            	<input class="form-control" placeholder="NIM" name="nim" type="text" autofocus maxlength="18" required>
+															<select class="form-control" name="nim" required>
+																<option value="" disabled selected>--- Pilih NIM ---</option>
+																<?php
+																		$no = 1;
+								                    $query = mysqli_query($link, "select * from mhs") or die(mysqli_error());
+								                    while($data = mysqli_fetch_row($query)){
+								                ?>
+                                    <option value="<?php echo $data[0]; ?>"><?php echo $data[0]." - ".$data[1]; ?></option>
+																<?php
+															     }
+																?>
+															</select>
                             </div>
                             <div class="form-group">
-                            	<input class="form-control" placeholder="Kode Kelas" name="kd_kelas" type="text" value="" maxlength="8">
+															<select class="form-control" name="kd_kelas" required>
+																<option value="" disabled selected>--- Pilih KELAS ---</option>
+																<?php
+																		$no = 1;
+								                    $query = mysqli_query($link, "select * from v_kelas") or die(mysqli_error());
+								                    while($data = mysqli_fetch_row($query)){
+								                ?>
+                                    <option value="<?php echo $data[0]; ?>"><?php echo $data[6]." - ".$data[1]; ?></option>
+																<?php
+															     }
+																?>
+															</select>
                             </div>
                        </fieldset>
         		</div>
@@ -76,10 +100,10 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
+
 
 <!-- --------------------------------------------------- EDIT --------------------------------------------------- -->
 <div class="modal fade" id="myEdit" role="dialog">
@@ -94,12 +118,40 @@
         		<div class="modal-body">
                     	<fieldset>
                         <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>">
-                        	<div class="form-group">
-                            	<input class="form-control" placeholder="NIM" name="nim" type="text" autofocus maxlength="18" value="<?php echo $_GET['id']; ?>"  required>
-                            </div>
-                            <div class="form-group">
-                            	<input class="form-control" placeholder="Kode Kelas" name="kd_kelas" type="text" maxlength="8" value="<?php get_data('ambil_kelas', 'kd_kelas', $_GET['id'], 'kd_kelas'); ?>">
-                            </div>
+
+														<?php
+															$nim = get_data('ambil_kelas', 'id', $_GET['id'], 'nim');
+															$kd_kelas = get_data('ambil_kelas', 'id', $_GET['id'], 'kd_kelas');
+														?>
+
+														<div class="form-group">
+																<select class="form-control" name="nim" required>
+																	<option value="" disabled selected>--- Pilih NIM ---</option>
+																	<?php
+									                    $query = mysqli_query($link, "select * from mhs") or die(mysqli_error());
+									                    while($data = mysqli_fetch_row($query)){
+									                ?>
+	                                    <option <?php if($nim == $data[0]){ echo "selected";} ?> value="<?php echo $data[0]; ?>"><?php echo $data[0]." - ".$data[1]; ?></option>
+																	<?php
+																     }
+																	?>
+																</select>
+	                            </div>
+
+	                            <div class="form-group">
+																<select class="form-control" name="kd_kelas" required>
+																	<option value="" disabled selected>--- Pilih KELAS ---</option>
+																	<?php
+																			$no = 1;
+									                    $query = mysqli_query($link, "select * from v_kelas") or die(mysqli_error());
+									                    while($data = mysqli_fetch_row($query)){
+									                ?>
+	                                    <option <?php if($kd_kelas == $data[0]){ echo "selected";} ?> value="<?php echo $data[0]; ?>"><?php echo $data[6]." - ".$data[1]; ?></option>
+																	<?php
+																     }
+																	?>
+																</select>
+	                            </div>
                        </fieldset>
         		</div>
         		<div class="modal-footer">
@@ -108,8 +160,6 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
-    

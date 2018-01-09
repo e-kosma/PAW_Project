@@ -6,7 +6,7 @@
 	include "../config/fungsi.php";
 	include "../config/koneksi.php";
 	cek_login($user);
-	
+
 	if(isset($_GET['page']))
     	$page=$_GET['page'];
 	else
@@ -52,8 +52,8 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-3 col-md-3">
-        	
-        
+
+
             <div class="panel-group" id="accordion">
             	<div class="panel panel-default">
                   <div class="panel-heading">
@@ -69,8 +69,8 @@
                             </div>
                         </div>
                   </div>
-                  
-                  
+
+
             	</div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -82,8 +82,8 @@
                     <div id="collapseOne" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
-                                
-                                <?php 
+
+                                <?php
 									$sql = mysqli_query($link, "select kelas.kd_kelas, kelas.nm_kelas, matkul.nm_matkul from kelas,matkul,dosen where kelas.nip = '$_SESSION[id]' and kelas.kd_matkul = matkul.kd_matkul");
 									$count = mysqli_num_rows($sql);
 									if($count>0){
@@ -95,12 +95,12 @@
                                         <a href="?page=materi&id=<?php echo $data['kd_kelas']; ?>"><?php echo $data['nm_matkul']." - ".$data['nm_kelas']; ?></a>
                                     </td>
                                 </tr>
-                                <?php 
-										} 
-						
+                                <?php
+										}
+
 									}else{
 								?>
-                                
+
                                 <tr>
                                     <td>
                                         <h6 style="text-align:center">Tidak ada kelas yang diambil</h6>
@@ -121,11 +121,30 @@
                     <div id="collapseTwo" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
-                                <tr>
-                                    <td>
-                                        <a href="#"><div class="glyphicon glyphicon-chevron-right"></div></a> 
-                                    </td>
-                                </tr>
+															<?php
+								$sql = mysqli_query($link, "select kelas.kd_kelas, kelas.nm_kelas, matkul.nm_matkul from kelas,matkul,dosen where kelas.nip = '$_SESSION[id]' and kelas.kd_matkul = matkul.kd_matkul");
+								$count = mysqli_num_rows($sql);
+								if($count>0){
+									while($data = mysqli_fetch_assoc($sql)){
+							 ?>
+															<tr>
+																	<td>
+																			<span class="glyphicon glyphicon-chevron-right"></span>
+																			<a href="?page=tugas&id=<?php echo $data['kd_kelas']; ?>"><?php echo $data['nm_matkul']." - ".$data['nm_kelas']; ?></a>
+																	</td>
+															</tr>
+															<?php
+									}
+
+								}else{
+							?>
+
+															<tr>
+																	<td>
+																			<h6 style="text-align:center">Tidak ada tugas</h6>
+																	</td>
+															</tr>
+															<?php } ?>
                             </table>
                         </div>
                     </div>
@@ -142,7 +161,7 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="#"><div class="glyphicon glyphicon-chevron-right"></div></a> 
+                                        <a href="#"><div class="glyphicon glyphicon-chevron-right"></div></a>
                                     </td>
                                 </tr>
                             </table>
@@ -153,19 +172,21 @@
         </div>
         <div class="col-sm-9 col-md-9">
             <div class="panel panel-default">
-                  
-                  
+
+
 				   <?php
-                        
+
                             if($page=="materi")
                                 include "materi.php";
                             else if($page=="dosen")
                                 include "dosen.php";
+														else if($page=="tugas")
+		                            include "tugas.php";
 							else if($page=="pengumuman")
 								include "welcome.php";
                    ?>
-                	
-            </div> 
+
+            </div>
         </div>
     </div>
 </div>
@@ -174,9 +195,9 @@
 	<script src="../asset/js/jquery.min.js"></script>
     <script src="../asset/js/bootstrap.min.js"></script>
     <script src="../asset/js/dataTables/jquery.dataTables.js"></script>
-    <script src="../asset/js/dataTables/dataTables.bootstrap.js"></script> 
-    
-     
+    <script src="../asset/js/dataTables/dataTables.bootstrap.js"></script>
+
+
 	 <?php
      	if(isset($_GET['id']) && !isset($_GET['page'])){
 			echo "<script>
@@ -184,12 +205,20 @@
 			</script>";
 		}
 	 ?>
-     
+
+	 <?php
+     	if(isset($_GET['id']) && isset($_GET['page']) && isset($_GET['tgs'])){
+			echo "<script>
+				$('#showTgs').modal('show');
+			</script>";
+		}
+	 ?>
+
      <script type="text/javascript">
     	$(function() {
         	$('#tabel1').dataTable();
         });
 	</script>
-    
+
 </body>
 </html>

@@ -1,9 +1,9 @@
 <?php
 	$cek = cek_login($user);
-	
+
 	if(isset($_POST['input'])){ input_dosen(); }
 	if(isset($_POST['edit'])){ edit_dosen(); }
-	if(isset($_GET['delete'])){ 
+	if(isset($_GET['delete'])){
 		delete_data('dosen','nip', $_GET['id']);
 		}
 ?>
@@ -14,8 +14,8 @@
 <br>
 <!-- ---------------------------------------------------------------view--------------------------------- -->
 <div class="panel-body">
-	<div style="width:98%; margin:auto"> 
-    
+	<div style="width:98%; margin:auto">
+
           <table id="tabel1" class="table">
             <thead>
               <tr>
@@ -29,7 +29,7 @@
             </thead>
             <tbody>
                 <?php
-                    $sql = mysqli_query($link, "select * from dosen") or die(mysqli_error()); 
+                    $sql = mysqli_query($link, "select * from dosen") or die(mysqli_error());
                     while($data = mysqli_fetch_row($sql)){
                 ?>
               <tr>
@@ -52,7 +52,7 @@
               <?php } ?>
             </tbody>
           </table>
-          
+
 	</div>
 </div>
 
@@ -75,12 +75,12 @@
                             	<input class="form-control" placeholder="Nama Dosen" name="nm_dosen" type="text" value="" maxlength="25">
                             </div>
                              <div class="form-group">
-                              <input class="form-control" placeholder="No Hp" name="nm_hp" type="text" value="" maxlength="13">
+                              <input class="form-control" placeholder="No Hp" name="no_hp" type="text" value="" maxlength="13">
                             </div>
                              <div class="form-group">
                               <input class="form-control" placeholder="Email" name="email" type="text" value="" maxlength="35">
                             </div>
-                           <div class="form-group" style="width:55px">
+                           <div class="form-group" style="width:150px">
                             	<input class="form-control" placeholder="Password" name="password" type="text" value="" maxlength="12">
                             </div>
                        </fieldset>
@@ -91,10 +91,10 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
+
 
 <!-- --------------------------------------------------- EDIT --------------------------------------------------- -->
 <div class="modal fade" id="myEdit" role="dialog">
@@ -113,16 +113,16 @@
                             	<input class="form-control" placeholder="NIP" name="nip" type="text" autofocus maxlength="18" value="<?php echo $_GET['id']; ?>"  required>
                             </div>
                             <div class="form-group">
-                            	<input class="form-control" placeholder="Nama Dosen" name="nm_dosen" type="text" maxlength="35" value="<?php get_data('dosen', 'nip', $_GET['id'], 'nm_dosen'); ?>">
+                            	<input class="form-control" placeholder="Nama Dosen" name="nm_dosen" type="text" maxlength="35" value="<?php echo get_data('dosen', 'nip', $_GET['id'], 'nm_dosen'); ?>">
                             </div>
                              <div class="form-group">
-                              <input class="form-control" placeholder="No Hp" name="no_hp" type="text" maxlength="13"= value="<?php get_data('dosen', 'nip', $_GET['id'], 'no_hp'); ?>">
+                              <input class="form-control" placeholder="No Hp" name="no_hp" type="text" maxlength="13" value="<?php echo get_data('dosen', 'nip', $_GET['id'], 'no_hp'); ?>">
                             </div>
                              <div class="form-group">
-                              <input class="form-control" placeholder="Email" name="email" type="text" maxlength="35" value="<?php get_data('dosen', 'nip', $_GET['id'], 'email'); ?>">
+                              <input class="form-control" placeholder="Email" name="email" type="text" maxlength="35" value="<?php echo get_data('dosen', 'nip', $_GET['id'], 'email'); ?>">
                             </div>
-                           <div class="form-group" style="width:55px">
-                            	<input class="form-control" placeholder="Password" name="password" type="text" value="<?php get_data('matkul', 'kd_matkul', $_GET['id'], 'password'); ?>" maxlength="12">
+                           <div class="form-group" style="width:150px">
+                            	<input class="form-control" placeholder="Password" name="password" type="text" value="<?php echo get_data('dosen', 'nip', $_GET['id'], 'password'); ?>" maxlength="12">
                             </div>
                        </fieldset>
         		</div>
@@ -132,8 +132,6 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
-    

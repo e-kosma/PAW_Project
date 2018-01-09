@@ -1,10 +1,10 @@
 <?php
 	$cek = cek_login($user);
-	
+
 	if(isset($_POST['input'])){ input_ruang(); }
 	if(isset($_POST['edit'])){ edit_ruang(); }
-	if(isset($_GET['delete'])){ 
-		delete_data('kelas','kd_kelas', $_GET['id']);
+	if(isset($_GET['delete'])){
+		delete_data('ruang','kd_ruang', $_GET['id']);
 		}
 ?>
 
@@ -14,25 +14,28 @@
 <br>
 <!-- ---------------------------------------------------------------view--------------------------------- -->
 <div class="panel-body">
-	<div style="width:98%; margin:auto"> 
-    
+	<div style="width:98%; margin:auto">
+
           <table id="tabel1" class="table">
             <thead>
               <tr>
-                <th>Kode Ruang</th>
+                <th>No</th>
+								<th>Kode Ruang</th>
                 <th>Nama Ruang</th>
                 <th width="80px"><center><div class="fa fa-gear fa-fw"></div></center></th>
               </tr>
             </thead>
             <tbody>
                 <?php
-                    $sql = mysqli_query($link, "select * from ruang") or die(mysqli_error()); 
+										$no=1;
+                    $sql = mysqli_query($link, "select * from ruang") or die(mysqli_error());
                     while($data = mysqli_fetch_row($sql)){
                 ?>
               <tr>
-                <td><?php echo $data[0]; ?></td>
+                <td><?php echo $no; ?></td>
+								<td><?php echo $data[0]; ?></td>
                 <td><?php echo $data[1]; ?></td>
-               
+
                 <td>
                 	<center>
                         <a href="?page=ruang&id=<?php echo $data[0]; ?>">
@@ -44,10 +47,10 @@
                     </center>
                 </td>
               </tr>
-              <?php } ?>
+              <?php $no++; } ?>
             </tbody>
           </table>
-          
+
 	</div>
 </div>
 
@@ -58,16 +61,16 @@
       		<div class="modal-content">
         		<div class="modal-header">
           			<button type="button" class="close" data-dismiss="modal">&times;</button>
-          			<h4 class="modal-title">Tambah Data Ruang</h4>
+          			<h4 class="modal-title">Tambah Data Ruangan</h4>
         		</div>
-                <form action="?page=kelas" method="post" id="frm-kelas">
+                <form action="?page=ruang" method="post" id="frm-kelas">
         		<div class="modal-body">
                     	<fieldset>
                         	  <div class="form-group">
-                            	<input class="form-control" placeholder="Kode Ruang" name="kd_ruang" type="text" autofocus maxlength="11" required>
+                            	<input class="form-control" placeholder="Kode Ruang" name="kd_ruang" type="text" maxlength="11" readonly>
                             </div>
                             <div class="form-group">
-                            	<input class="form-control" plceholder="Nama Ruang" name="nm_ruang" type="text" value="" maxlength="10">
+                            	<input class="form-control" placeholder="Nama Ruang" name="nm_ruang" type="text" maxlength="10" autofocus required>
                             </div>
                        </fieldset>
         		</div>
@@ -77,10 +80,10 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
+
 
 <!-- --------------------------------------------------- EDIT --------------------------------------------------- -->
 <div class="modal fade" id="myEdit" role="dialog">
@@ -96,10 +99,10 @@
                     	<fieldset>
                         <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>">
                         	<div class="form-group">
-                            	<input class="form-control" placeholder="Kode Ruang" name="kd_ruang" type="text" autofocus maxlength="11" value="<?php echo $_GET['id']; ?>"  required>
+                            	<input class="form-control" placeholder="Kode Ruang" name="kd_ruang" type="text" autofocus maxlength="11" value="<?php echo $_GET['id']; ?>"  required readonly>
                             </div>
                             <div class="form-group">
-                            	<input class="form-control" placeholder="Nama Ruang" name="nm_ruang" type="text" maxlength="10" value="<?php get_data('ruang', 'kd_ruang', $_GET['id'], 'nm_ruang'); ?>">
+                            	<input class="form-control" placeholder="Nama Ruang" name="nm_ruang" type="text" maxlength="10" value="<?php echo get_data('ruang', 'kd_ruang', $_GET['id'], 'nm_ruang'); ?>">
                             </div>
                        </fieldset>
         		</div>
@@ -109,8 +112,6 @@
         		</div>
                 </form>
       		</div>
-      
+
     	</div>
 	</div>
-    
-    
